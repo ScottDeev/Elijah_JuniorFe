@@ -45,9 +45,7 @@ export default function Datagrid() {
     fetchRockets();
   }, [dispatch]);
 
-  console.log(!loading, error);
-
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
   useEffect(() => {
