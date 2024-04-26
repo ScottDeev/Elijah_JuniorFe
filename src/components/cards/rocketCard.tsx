@@ -18,7 +18,7 @@ export default function RocketCard({
     <>
       <div
         onClick={() => setOpen(true)}
-        className={`w-[250px] rounded-[8px] shadow-xl p-[20px] rocket-${index}`}
+        className={`w-[250px] rounded-[8px] shadow-xl p-[20px] cursor-pointer rocket-${index}`}
       >
         <img
           src={data?.flickr_images[0]}
