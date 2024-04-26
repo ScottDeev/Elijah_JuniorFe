@@ -5,14 +5,16 @@ export default function RocketDetails({
   open,
   onClose,
   data,
+  index,
 }: {
   open: boolean;
   onClose: () => void;
   data: RocketCardProps;
+  index: number;
 }) {
   return (
     <Modal open={open} onClose={onClose} maxWidth={"sm"}>
-      <div className="flex flex-col gap-[15px]">
+      <div className={`flex flex-col gap-[15px] rocket-modal-${index}`}>
         <img
           src={data.flickr_images[0]}
           alt={data.rocket_name}

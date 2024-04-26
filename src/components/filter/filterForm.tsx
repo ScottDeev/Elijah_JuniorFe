@@ -8,9 +8,9 @@ export default function FilterForm() {
   const { rockets } = useSelector((state: RocketsState) => state.rockets);
 
   interface Filters {
-    active: "";
+    active: string;
     country: string;
-    boosters: number;
+    boosters: number | string;
   }
   const [filters, setFilters] = useState<Filters>({
     active: "",
@@ -24,13 +24,23 @@ export default function FilterForm() {
     const filteredRockets = function filterData() {
       return rockets.filter((rocket: RocketCardProps) => {
         // Check if each item satisfies all filter conditions
-        return Object.keys(filters).every((key) => {
-          if (filters[key] === "") return true;
+        // if (filters.boosters == rocket.boosters) return true;
+        // if (rocket.active === filters.active) return true;
+        // if (rocket.country.includes(filters.country)) return true;
+        // return Object.keys(filters).every((key) => {
+        //   if (filters[key] === "") return true;
 
-          return key === "active"
-            ? rocket[key] == (filters[key] === "active")
-            : rocket[key] == filters[key];
-        });
+        //   return key === "active"
+        //     ? rocket[key] == (filters[key] === "active")
+        //     : rocket[key] == filters[key];
+        // });
+        const { active, boosters, country } = filters;
+
+        return (
+          (active === "" || rocket.active == (active === "active")) &&
+          (boosters == "" || rocket.boosters == boosters) &&
+          (country === "" || rocket.country == country)
+        );
       });
     };
 

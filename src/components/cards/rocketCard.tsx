@@ -2,7 +2,13 @@ import { useState } from "react";
 import { RocketCardProps } from "../../type";
 import RocketDetails from "./rocketDetails";
 
-export default function RocketCard({ data }: { data: RocketCardProps }) {
+export default function RocketCard({
+  data,
+  index,
+}: {
+  data: RocketCardProps;
+  index: number;
+}) {
   const [open, setOpen] = useState<boolean>(false);
 
   const onClose = () => {
@@ -12,7 +18,7 @@ export default function RocketCard({ data }: { data: RocketCardProps }) {
     <>
       <div
         onClick={() => setOpen(true)}
-        className="w-[250px] rounded-[8px] shadow-xl p-[20px]"
+        className={`w-[250px] rounded-[8px] shadow-xl p-[20px] rocket-${index}`}
       >
         <img
           src={data?.flickr_images[0]}
@@ -32,7 +38,7 @@ export default function RocketCard({ data }: { data: RocketCardProps }) {
           </span>
         </div>
       </div>
-      <RocketDetails open={open} onClose={onClose} data={data} />
+      <RocketDetails open={open} onClose={onClose} data={data} index={index} />
     </>
   );
 }

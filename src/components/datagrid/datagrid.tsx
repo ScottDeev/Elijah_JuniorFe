@@ -16,7 +16,7 @@ export default function Datagrid() {
   const [currentRockets, setCurrentRockets] = useState<Array<RocketCardProps>>(
     []
   );
-  const { rockets, filteredRockets } = useSelector(
+  const { filteredRockets } = useSelector(
     (state: RocketsState) => state.rockets
   );
 
@@ -42,18 +42,19 @@ export default function Datagrid() {
       filteredRockets.slice(indexOfFirstRocket, indexOfLastRocket)
     );
   }, [page, filteredRockets]);
-  console.log(currentRockets);
+  console.log(currentRockets, filteredRockets);
 
   return (
     <section className="flex flex-col gap-[30px] items-center my-[50px]">
-      <div className="flex flex-wrap justify-center gap-[20px] ">
-        {currentRockets.length > 0 &&
-          currentRockets.map((r: RocketCardProps, i) => (
-            <RocketCard key={JSON.stringify(i)} data={r} />
+      {currentRockets.length > 0 && (
+        <div className="rockets flex flex-wrap justify-center gap-[20px] ">
+          {currentRockets.map((r: RocketCardProps, i) => (
+            <RocketCard key={JSON.stringify(i)} data={r} index={i} />
           ))}
-      </div>
+        </div>
+      )}
       <PaginationCard
-        count={filteredRockets.length / 10}
+        count={Math.ceil(filteredRockets.length / 10)}
         onChange={handleChange}
         page={page}
       />
