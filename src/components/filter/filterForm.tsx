@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RocketsState, storeFilteredRockets } from "../../store/RocketsReducer";
+import {
+  RocketsState,
+  setLoadingState,
+  storeFilteredRockets,
+} from "../../store/RocketsReducer";
 import { RocketCardProps } from "../../type";
 
 export default function FilterForm() {
@@ -15,7 +19,7 @@ export default function FilterForm() {
   const [filters, setFilters] = useState<Filters>({
     active: "",
     country: "",
-    boosters: 0,
+    boosters: "",
   });
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -46,7 +50,13 @@ export default function FilterForm() {
 
     console.log(filteredRockets(), filters);
     const data = filteredRockets();
-    dispatch(storeFilteredRockets(data));
+
+    // This help gives a little loading feel
+    dispatch(setLoadingState(true));
+    setTimeout(() => {
+      dispatch(storeFilteredRockets(data));
+      dispatch(setLoadingState(false));
+    }, 2000);
   };
 
   const handleInputChange = (e: {
@@ -88,14 +98,19 @@ export default function FilterForm() {
         >
           Country of Launch
         </label>
-        <input
+        <select
           id="country"
           name="country"
-          type="text"
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           value={filters.country}
           onChange={handleInputChange}
-        />
+        >
+          <option value=""></option>
+          <option value="Republic of the Marshall Islands">
+            Republic of the Marshall Islands
+          </option>
+          <option value="United States">United States</option>
+        </select>
       </div>
       <div className="mb-4">
         <label

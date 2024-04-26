@@ -37,6 +37,16 @@ export default function RocketCard({
             {data.active ? "Active" : "Inactive"}
           </span>
         </div>
+        <div className="mt-2">
+          <p>
+            <span className="font-[500]">Country: </span>
+            {data.country}
+          </p>
+          <p>
+            <span className="font-[500]">Number of booasters: </span>
+            {data.boosters}
+          </p>
+        </div>
       </div>
       <RocketDetails open={open} onClose={onClose} data={data} index={index} />
     </>
